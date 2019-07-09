@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -28,11 +27,11 @@ namespace MimeDetective.InMemory
 
             using (var ms = new MemoryStream(file))
             {
-                return CheckForDocxAndXlsxAndPptx(ms) ?? MimeTypes.ZIP;
+                return CheckForMsOfficeTypes(ms) ?? MimeTypes.ZIP;
             }
         }
 
-        private static FileType CheckForDocxAndXlsxAndPptx(Stream zip)
+        private static FileType CheckForMsOfficeTypes(Stream zip)
         {
             try
             {
@@ -43,9 +42,12 @@ namespace MimeDetective.InMemory
 
                     if (zipFile.Entries.Any(e => e.FullName.StartsWith("xl/")))
                         return MimeTypes.EXCELX;
-                    
+
                     if (zipFile.Entries.Any(e => e.FullName.StartsWith("ppt/")))
                         return MimeTypes.PPTX;
+
+                    if (zipFile.Entries.Any(e => e.FullName.StartsWith("visio/")))
+                        return MimeTypes.VSDX;
 
                     return CheckForOdtAndOds(zipFile);
                 }
