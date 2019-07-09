@@ -24,6 +24,7 @@ namespace MimeDetective.InMemory
         public static readonly FileType WORDX = new FileType(new byte?[0], 512, "docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
         public static readonly FileType EXCELX = new FileType(new byte?[0], 512, "xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         public static readonly FileType PPTX = new FileType(new byte?[0], 512, "pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+        public static readonly FileType VSDX = new FileType(new byte?[0], 512, "vsdx", "application/vnd-ms-visio.drawing");
         public static readonly FileType ODT = new FileType(new byte?[0], 512, "odt", "application/vnd.oasis.opendocument.text");
         public static readonly FileType ODS = new FileType(new byte?[0], 512, "ods", "application/vnd.oasis.opendocument.spreadsheet");
 
