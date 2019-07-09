@@ -28,11 +28,11 @@ namespace MimeDetective.InMemory
 
             using (var ms = new MemoryStream(file))
             {
-                return CheckForDocxAndXlsx(ms) ?? MimeTypes.ZIP;
+                return CheckForDocxAndXlsxAndPptx(ms) ?? MimeTypes.ZIP;
             }
         }
 
-        private static FileType CheckForDocxAndXlsx(Stream zip)
+        private static FileType CheckForDocxAndXlsxAndPptx(Stream zip)
         {
             try
             {
@@ -43,6 +43,9 @@ namespace MimeDetective.InMemory
 
                     if (zipFile.Entries.Any(e => e.FullName.StartsWith("xl/")))
                         return MimeTypes.EXCELX;
+                    
+                    if (zipFile.Entries.Any(e => e.FullName.StartsWith("ppt/")))
+                        return MimeTypes.PPTX;
 
                     return CheckForOdtAndOds(zipFile);
                 }
