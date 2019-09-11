@@ -92,7 +92,7 @@ namespace MimeDetective.InMemory
         {
             var ooMimeType = zipFile.Entries.FirstOrDefault(e => e.FullName == "mimetype");
             if (ooMimeType == null || ooMimeType.Length > 127) //zip bomb protection
-                return CheckForNupkg(zipFile);
+                return CheckForOtherTypes(zipFile);
 
             using (var textReader = new StreamReader(ooMimeType.Open()))
             {
@@ -111,10 +111,13 @@ namespace MimeDetective.InMemory
             return null;
         }
 
-        private static FileType CheckForNupkg(ZipArchive zipFile)
+        private static FileType CheckForOtherTypes(ZipArchive zipFile)
         {
             if (zipFile.Entries.Any(x => x.Name.EndsWith(".nuspec")))
                 return MimeTypes.NUPKG;
+
+            if (zipFile.Entries.Any(x => x.FullName.Contains("META-INF/")))
+                return MimeTypes.JAR;
             
             return null;
         }

@@ -93,6 +93,9 @@ namespace MimeDetective.InMemory
         // Epub
         public static readonly FileType EPUB = new FileType(new byte?[0], "epub", "application/epub+zip");
 
+        // Jar
+        public static readonly FileType JAR = new FileType(new byte?[0], "jar", "application/java-archive");
+
         // media
         public static readonly FileType OGG = new FileType(new byte?[] { 0x4f, 0x67, 0x67, 0x53 }, "oga,ogg,ogv,ogx", "application/ogg");
 
