@@ -20,13 +20,15 @@ namespace MimeDetective.InMemory
                 PYC_3_4_A1_1, PYC_3_4_A1_2, PYC_3_4_A1_3, PYC_3_4_A1_4, PYC_3_4_A4_1, PYC_3_4_A4_2, PYC_3_4_RC2, PYC_3_5_A0, PYC_3_5_B1,
                 PYC_3_5_B2_1, PYC_3_5_B2_2, PYC_3_5_2, PYC_3_6_A0_1, PYC_3_6_A0_2, PYC_3_6_A1_1, PYC_3_6_A1_2, PYC_3_6_A1_3, PYC_3_6_A1_4,
                 PYC_3_6_B1_1, PYC_3_6_B1_2, PYC_3_6_B1_3, PYC_3_6_B2, PYC_3_6_RC2, PYC_3_7_A1, PYC_3_7_A2, PYC_3_7_A4, PYC_3_7_B1, PYC_3_7_B5,
-                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3
+                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS
             };
         }
 
         public static List<FileType> AllTypes { get; }
 
         #region Constants
+
+        #region Temp
 
         // office and documents
         public static readonly FileType WORD = new FileType(new byte?[] { 0xEC, 0xA5, 0xC1, 0x00 }, 512, "doc", "application/msword");
@@ -99,6 +101,24 @@ namespace MimeDetective.InMemory
                                                             0x57, 0x41, 0x56, 0x45, 0x66, 0x6D, 0x74, 0x20 }, "wav", "audio/wav");
 
         public static readonly FileType PST = new FileType(new byte?[] { 0x21, 0x42, 0x44, 0x4E }, "pst", "application/octet-stream");
+
+        //MPEG Transport Stream (MPEG-2 Part 1)
+        public static readonly FileType MPEGTS = new FileType(
+            new byte?[]
+            {
+                0x47, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null, null, null, null, 0x47
+            }, "ts,tsv,tsa", "video/mp2t");
 
         //MKV,MKA,MKS,MK3D,WEBM
         public static readonly FileType MKVAS3D_WEBM = new FileType(new byte?[] { 0x1a, 0x45, 0xdf, 0xa3 }, "mkv,mka,mks,mk3d,webm", "video/x-matroska");
