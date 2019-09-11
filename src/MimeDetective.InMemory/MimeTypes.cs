@@ -20,7 +20,7 @@ namespace MimeDetective.InMemory
                 PYC_3_4_A1_1, PYC_3_4_A1_2, PYC_3_4_A1_3, PYC_3_4_A1_4, PYC_3_4_A4_1, PYC_3_4_A4_2, PYC_3_4_RC2, PYC_3_5_A0, PYC_3_5_B1,
                 PYC_3_5_B2_1, PYC_3_5_B2_2, PYC_3_5_2, PYC_3_6_A0_1, PYC_3_6_A0_2, PYC_3_6_A1_1, PYC_3_6_A1_2, PYC_3_6_A1_3, PYC_3_6_A1_4,
                 PYC_3_6_B1_1, PYC_3_6_B1_2, PYC_3_6_B1_3, PYC_3_6_B2, PYC_3_6_RC2, PYC_3_7_A1, PYC_3_7_A2, PYC_3_7_A4, PYC_3_7_B1, PYC_3_7_B5,
-                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS, VMDK, NVRAM, PCAP_1, PCAP_2
+                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS, VMDK, NVRAM, PCAP_1, PCAP_2, PCAPNG
             };
         }
 
@@ -168,9 +168,12 @@ namespace MimeDetective.InMemory
         //NVRAM
         public static readonly FileType NVRAM = new FileType(new byte?[] { 0x4d, 0x52, 0x56, 0x4e, 0x01 }, "nvram", "application/octet-stream");
 
-        //PCAP
+        //PCAP Libpcap File Format
         public static readonly FileType PCAP_1 = new FileType(new byte?[] { 0xa1, 0xb2, 0xc3, 0xd4 }, "pcap", "application/vnd.tcpdump.pcap");
         public static readonly FileType PCAP_2 = new FileType(new byte?[] { 0xd4, 0xc3, 0xb2, 0xa1 }, "pcap", "application/vnd.tcpdump.pcap");
+
+        //PCAPNG PCAP Next Generation Dump File Format
+        public static readonly FileType PCAPNG = new FileType(new byte?[] { 0x0a, 0x0d, 0x0d, 0x0a }, "pcapng", "application/octet-stream");
 
         #endregion
         #region Python
