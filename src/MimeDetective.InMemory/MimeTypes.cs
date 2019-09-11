@@ -87,6 +87,9 @@ namespace MimeDetective.InMemory
         //bzip2 compressed archive
         public static readonly FileType BZ2 = new FileType(new byte?[] { 0x42, 0x5A, 0x68 }, "bz2,tar,bz2,tbz2,tb2", "application/x-bzip2");
 
+        // Epub
+        public static readonly FileType EPUB = new FileType(new byte?[0], "epub", "application/epub+zip");
+
         // media
         public static readonly FileType OGG = new FileType(new byte?[] { 103, 103, 83, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0 }, "oga,ogg,ogv,ogx", "application/ogg");
 

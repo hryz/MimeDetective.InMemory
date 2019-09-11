@@ -78,7 +78,7 @@ namespace MimeDetective.InMemory
                     if (zipFile.Entries.Any(e => e.FullName.StartsWith("visio/")))
                         return MimeTypes.VSDX;
 
-                    return CheckForOdtAndOds(zipFile);
+                    return CheckForMimeTypeFile(zipFile);
                 }
             }
             catch (InvalidDataException)
@@ -88,7 +88,7 @@ namespace MimeDetective.InMemory
 
         }
 
-        private static FileType CheckForOdtAndOds(ZipArchive zipFile)
+        private static FileType CheckForMimeTypeFile(ZipArchive zipFile)
         {
             var ooMimeType = zipFile.Entries.FirstOrDefault(e => e.FullName == "mimetype");
             if (ooMimeType == null || ooMimeType.Length > 127) //zip bomb protection
@@ -103,6 +103,9 @@ namespace MimeDetective.InMemory
 
                 if (mimeType == MimeTypes.ODS.Mime)
                     return MimeTypes.ODS;
+
+                if (mimeType == MimeTypes.EPUB.Mime)
+                    return MimeTypes.EPUB;
             }
 
             return null;
