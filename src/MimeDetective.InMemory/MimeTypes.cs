@@ -20,7 +20,7 @@ namespace MimeDetective.InMemory
                 PYC_3_4_A1_1, PYC_3_4_A1_2, PYC_3_4_A1_3, PYC_3_4_A1_4, PYC_3_4_A4_1, PYC_3_4_A4_2, PYC_3_4_RC2, PYC_3_5_A0, PYC_3_5_B1,
                 PYC_3_5_B2_1, PYC_3_5_B2_2, PYC_3_5_2, PYC_3_6_A0_1, PYC_3_6_A0_2, PYC_3_6_A1_1, PYC_3_6_A1_2, PYC_3_6_A1_3, PYC_3_6_A1_4,
                 PYC_3_6_B1_1, PYC_3_6_B1_2, PYC_3_6_B1_3, PYC_3_6_B2, PYC_3_6_RC2, PYC_3_7_A1, PYC_3_7_A2, PYC_3_7_A4, PYC_3_7_B1, PYC_3_7_B5,
-                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS, VMDK, NVRAM, PCAP_1, PCAP_2, PCAPNG, SQLITEDB
+                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS, VMDK, NVRAM, PCAP_1, PCAP_2, PCAPNG, SQLITEDB, TTF
             };
         }
 
@@ -189,6 +189,9 @@ namespace MimeDetective.InMemory
                 {
                     0x53, 0x51, 0x4c, 0x69, 0x74, 0x65, 0x20, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x20, 0x33, 0x00
                 }, "db,sqlitedb,sqlite", "application/x-sqlite3");
+
+        //TTF Font
+        public static readonly FileType TTF = new FileType(new byte?[] { 0x00, 0x01, 0x00, 0x00, 0x00 }, "ttf,ttc", "application/x-font-ttf");
 
         #endregion
         #region Python
