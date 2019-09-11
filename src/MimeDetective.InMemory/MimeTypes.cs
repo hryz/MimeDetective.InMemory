@@ -20,6 +20,7 @@ namespace MimeDetective.InMemory
                 PYC_3_4_A1_1, PYC_3_4_A1_2, PYC_3_4_A1_3, PYC_3_4_A1_4, PYC_3_4_A4_1, PYC_3_4_A4_2, PYC_3_4_RC2, PYC_3_5_A0, PYC_3_5_B1,
                 PYC_3_5_B2_1, PYC_3_5_B2_2, PYC_3_5_2, PYC_3_6_A0_1, PYC_3_6_A0_2, PYC_3_6_A1_1, PYC_3_6_A1_2, PYC_3_6_A1_3, PYC_3_6_A1_4,
                 PYC_3_6_B1_1, PYC_3_6_B1_2, PYC_3_6_B1_3, PYC_3_6_B2, PYC_3_6_RC2, PYC_3_7_A1, PYC_3_7_A2, PYC_3_7_A4, PYC_3_7_B1, PYC_3_7_B5,
+                MKVAS3D_WEBM
             };
         }
 
@@ -98,6 +99,9 @@ namespace MimeDetective.InMemory
                                                             0x57, 0x41, 0x56, 0x45, 0x66, 0x6D, 0x74, 0x20 }, "wav", "audio/wav");
 
         public static readonly FileType PST = new FileType(new byte?[] { 0x21, 0x42, 0x44, 0x4E }, "pst", "application/octet-stream");
+
+        //MKV,MKA,MKS,MK3D,WEBM
+        public static readonly FileType MKVAS3D_WEBM = new FileType(new byte?[] { 0x1a, 0x45, 0xdf, 0xa3 }, "mkv,mka,mks,mk3d,webm", "video/x-matroska");
 
         //Generic AutoCAD drawing image/vnd.dwg  image/x-dwg application/acad
         public static readonly FileType DWG = new FileType(new byte?[] { 0x41, 0x43, 0x31, 0x30 }, "dwg", "application/acad");
