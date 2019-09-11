@@ -10,7 +10,7 @@ namespace MimeDetective.InMemory
             AllTypes = new List<FileType> 
             { 
                 PDF, WORD, EXCEL, JPEG, ZIP, RAR, RTF, PNG, PPT, GIF, DLL_EXE, MSDOC,
-                BMP, DLL_EXE, /*ZIP_7z,*/ ZIP_7z_2, GZ_TGZ, TAR_ZH, TAR_ZV, OGG, ICO, XML, MIDI, FLV, WAVE, DWG, LIB_COFF, PST, PSD,
+                BMP, DLL_EXE, /*ZIP_7z,*/ ZIP_7z_2, GZ_TGZ, TAR_ZH, TAR_ZV, OGG, ICO, XML, MIDI, FLV, WAVE, DWG, DEB, PST, PSD,
                 AES, SKR, SKR_2, PKR, EML_FROM, ELF, TXT_UTF8, TXT_UTF16_BE, TXT_UTF16_LE, TXT_UTF32_BE, TXT_UTF32_LE, TIFF, BZ2,
                 PYC_1_5, PYC_1_6, PYC_2_0, PYC_2_1, PYC_2_2, PYC_2_3_A0_1, PYC_2_3_A0_2, PYC_2_3_A0_3, PYC_2_4_A0, PYC_2_4_A3, PYC_2_4_B1,
                 PYC_2_5_A0_1, PYC_2_5_A0_2, PYC_2_5_A0_3, PYC_2_5_A0_4, PYC_2_5_B3_1, PYC_2_5_B3_2, PYC_2_5_C1, PYC_2_5_C2, PYC_2_6_A0,
@@ -132,7 +132,8 @@ namespace MimeDetective.InMemory
         //Photoshop image file
         public static readonly FileType PSD = new FileType(new byte?[] { 0x38, 0x42, 0x50, 0x53 }, "psd", "application/octet-stream");
 
-        public static readonly FileType LIB_COFF = new FileType(new byte?[] { 0x21, 0x3C, 0x61, 0x72, 0x63, 0x68, 0x3E, 0x0A }, "lib", "application/octet-stream");
+        //deb  linux deb file
+        public static readonly FileType DEB = new FileType(new byte?[] { 0x21, 0x3C, 0x61, 0x72, 0x63, 0x68, 0x3E }, "deb", "application/vnd.debian.binary-package");
 
         //AES Crypt file format. (The fourth byte is the version number.)
         public static readonly FileType AES = new FileType(new byte?[] { 0x41, 0x45, 0x53 }, "aes", "application/octet-stream");
