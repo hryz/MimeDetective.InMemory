@@ -7,6 +7,32 @@ namespace MimeDetective.InMemory
 {
     public static class MimeExtensions
     {
+        public static FileType DetectMimeType(this Stream stream)
+        {
+            var data = new byte[1024];
+            stream.Read(data, 0, data.Length);
+            stream.Position = 0;
+
+            IEnumerable<byte?> GetHeader(FileType t) => data
+                .Skip(t.HeaderOffset)
+                .Take(t.Header.Length)
+                .Cast<byte?>();
+
+            var comparer = new IgnoreNullComparer();
+
+            var result = MimeTypes.AllTypes
+                .OrderByDescending(t => t.Header.Length)
+                .FirstOrDefault(t => t.Header.SequenceEqual(GetHeader(t), comparer));
+
+            if (result == null)
+                return null;
+
+            if (!result.Equals(MimeTypes.ZIP))
+                return result;
+
+            return CheckForMsOfficeTypes(stream) ?? MimeTypes.ZIP;
+        }
+
         public static FileType DetectMimeType(this byte[] file)
         {
             IEnumerable<byte?> GetHeader(FileType t) => file
@@ -17,6 +43,7 @@ namespace MimeDetective.InMemory
             var comparer = new IgnoreNullComparer();
 
             var result = MimeTypes.AllTypes
+                .OrderByDescending(t => t.Header.Length)
                 .FirstOrDefault(t => t.Header.SequenceEqual(GetHeader(t), comparer));
 
             if (result == null)

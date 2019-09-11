@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{49C0AB88-6705-462E-8A62-4990F78A83A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeDetective.InMemory", "src\MimeDetective.InMemory\MimeDetective.InMemory.csproj", "{69886362-5200-45D2-AAD0-7605EAC2A574}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MimeDetective.InMemory", "src\MimeDetective.InMemory\MimeDetective.InMemory.csproj", "{69886362-5200-45D2-AAD0-7605EAC2A574}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MimeDetective.InMemory.Tests", "src\MimeDetective.InMemory.Tests\MimeDetective.InMemory.Tests.csproj", "{7064936D-8A0B-40CC-BF4A-023CE4592CC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MimeDetective.InMemory.Tests", "src\MimeDetective.InMemory.Tests\MimeDetective.InMemory.Tests.csproj", "{7064936D-8A0B-40CC-BF4A-023CE4592CC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

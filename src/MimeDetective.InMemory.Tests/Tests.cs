@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -30,6 +30,7 @@ namespace MimeDetective.InMemory.Tests
         private static IEnumerable<object[]> TestDataSet =>
             MimeTypes.AllTypes
                 .Where(x => x.Header.Length > 0)
+                .OrderByDescending(x => x.Header.LongLength)
                 .Select(x => new object[] { x });
     }
 }

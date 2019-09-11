@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
 
 namespace MimeDetective.InMemory
@@ -7,12 +7,18 @@ namespace MimeDetective.InMemory
     {
         static MimeTypes()
         {
-            AllTypes = new List<FileType> { PDF, WORD, EXCEL, JPEG, ZIP, RAR, RTF, PNG, PPT, GIF, DLL_EXE, MSDOC,
-                BMP, DLL_EXE, ZIP_7z, ZIP_7z_2, GZ_TGZ, TAR_ZH, TAR_ZV, OGG, ICO, XML, MIDI, FLV, WAVE, DWG, LIB_COFF, PST, PSD,
-                AES, SKR, SKR_2, PKR, EML_FROM, ELF, TXT_UTF8, TXT_UTF16_BE, TXT_UTF16_LE, TXT_UTF32_BE, TXT_UTF32_LE, TIFF, BZ2 };
+            AllTypes = new List<FileType> 
+            { 
+                PDF, WORD, EXCEL, JPEG, ZIP, RAR, RTF, PNG, PPT, GIF, DLL_EXE, MSDOC,
+                BMP, DLL_EXE, /*ZIP_7z,*/ ZIP_7z_2, GZ_TGZ, TAR_ZH, TAR_ZV, OGG, ICO, XML, MIDI, FLV, WAVE, DWG, LIB_COFF, PST, PSD,
+                AES, SKR, SKR_2, PKR, EML_FROM, ELF, TXT_UTF8, TXT_UTF16_BE, TXT_UTF16_LE, TXT_UTF32_BE, TXT_UTF32_LE, TIFF, BZ2,
+                PYC_1_5, PYC_1_6, PYC_2_0
+            };
         }
 
         public static List<FileType> AllTypes { get; }
+
+        #region Constants
 
         // office and documents
         public static readonly FileType WORD = new FileType(new byte?[] { 0xEC, 0xA5, 0xC1, 0x00 }, 512, "doc", "application/msword");
@@ -55,7 +61,7 @@ namespace MimeDetective.InMemory
         //archives
         public static readonly FileType GZ_TGZ = new FileType(new byte?[] { 0x1F, 0x8B, 0x08 }, "gz, tgz", "application/x-gz");
 
-        public static readonly FileType ZIP_7z = new FileType(new byte?[] { 66, 77 }, "7z", "application/x-compressed");
+        //public static readonly FileType ZIP_7z = new FileType(new byte?[] { 66, 77 }, "7z", "application/x-compressed");
         public static readonly FileType ZIP_7z_2 = new FileType(new byte?[] { 0x37, 0x7A, 0xBC, 0xAF, 0x27, 0x1C }, "7z", "application/x-compressed");
 
         public static readonly FileType ZIP = new FileType(new byte?[] { 0x50, 0x4B, 0x03, 0x04 }, "zip", "application/x-compressed");
@@ -81,7 +87,6 @@ namespace MimeDetective.InMemory
         public static readonly FileType FLV = new FileType(new byte?[] { 0x46, 0x4C, 0x56, 0x01 }, "flv", "application/unknown");
 
         //WAV       Resource Interchange File Format -- Audio for Windows file, where xx xx xx xx is the file size (little endian), audio/wav audio/x-wav
-
         public static readonly FileType WAVE = new FileType(new byte?[] { 0x52, 0x49, 0x46, 0x46, null, null, null, null,
                                                             0x57, 0x41, 0x56, 0x45, 0x66, 0x6D, 0x74, 0x20 }, "wav", "audio/wav");
 
@@ -120,5 +125,18 @@ namespace MimeDetective.InMemory
 
         //EVTX      Windows Vista event log file
         public static readonly FileType ELF = new FileType(new byte?[] { 0x45, 0x6C, 0x66, 0x46, 0x69, 0x6C, 0x65, 0x00 }, "elf", "text/plain");
+
+        #region Python
+
+        // Python 1
+        public static readonly FileType PYC_1_5 = new FileType(new byte?[] { 0x99, 0x4e }, "pyc", "application/octet-stream", "Python 1.5/1.5.1/1.5.2");
+        public static readonly FileType PYC_1_6 = new FileType(new byte?[] { 0x4c, 0xc4 }, "pyc", "application/octet-stream", "Python 1.6");
+
+        // Python 2
+        public static readonly FileType PYC_2_0 = new FileType(new byte?[] { 0x87, 0xc6 }, "pyc", "application/octet-stream", "Python 2.0/2.0.1");
+
+        #endregion
+
+        #endregion
     }
 }
