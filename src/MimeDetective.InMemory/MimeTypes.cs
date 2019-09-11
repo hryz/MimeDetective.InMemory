@@ -20,7 +20,7 @@ namespace MimeDetective.InMemory
                 PYC_3_4_A1_1, PYC_3_4_A1_2, PYC_3_4_A1_3, PYC_3_4_A1_4, PYC_3_4_A4_1, PYC_3_4_A4_2, PYC_3_4_RC2, PYC_3_5_A0, PYC_3_5_B1,
                 PYC_3_5_B2_1, PYC_3_5_B2_2, PYC_3_5_2, PYC_3_6_A0_1, PYC_3_6_A0_2, PYC_3_6_A1_1, PYC_3_6_A1_2, PYC_3_6_A1_3, PYC_3_6_A1_4,
                 PYC_3_6_B1_1, PYC_3_6_B1_2, PYC_3_6_B1_3, PYC_3_6_B2, PYC_3_6_RC2, PYC_3_7_A1, PYC_3_7_A2, PYC_3_7_A4, PYC_3_7_B1, PYC_3_7_B5,
-                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS
+                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS, VMDK
             };
         }
 
@@ -162,6 +162,8 @@ namespace MimeDetective.InMemory
         public static readonly FileType ISO_2 = new FileType(new byte?[] { 0x43, 0x44, 0x30, 0x30, 0x31 }, 34817, "iso,img,cdr,dvdr", "application/x-iso-image");
         public static readonly FileType ISO_3 = new FileType(new byte?[] { 0x43, 0x44, 0x30, 0x30, 0x31 }, 36865, "iso,img,cdr,dvdr", "application/x-iso-image");
 
+        //VMDK
+        public static readonly FileType VMDK = new FileType(new byte?[] { 0x4b, 0x44, 0x4d, 0x56, 0x01 }, "vmdk", "application/octet-stream");
 
 
 
