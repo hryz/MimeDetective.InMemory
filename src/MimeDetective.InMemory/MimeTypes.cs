@@ -20,7 +20,7 @@ namespace MimeDetective.InMemory
                 PYC_3_4_A1_1, PYC_3_4_A1_2, PYC_3_4_A1_3, PYC_3_4_A1_4, PYC_3_4_A4_1, PYC_3_4_A4_2, PYC_3_4_RC2, PYC_3_5_A0, PYC_3_5_B1,
                 PYC_3_5_B2_1, PYC_3_5_B2_2, PYC_3_5_2, PYC_3_6_A0_1, PYC_3_6_A0_2, PYC_3_6_A1_1, PYC_3_6_A1_2, PYC_3_6_A1_3, PYC_3_6_A1_4,
                 PYC_3_6_B1_1, PYC_3_6_B1_2, PYC_3_6_B1_3, PYC_3_6_B2, PYC_3_6_RC2, PYC_3_7_A1, PYC_3_7_A2, PYC_3_7_A4, PYC_3_7_B1, PYC_3_7_B5,
-                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS, VMDK, NVRAM, PCAP_1, PCAP_2, PCAPNG, SQLITEDB, TTF, WOFF
+                MKVAS3D_WEBM, ISO_1, ISO_2, ISO_3, MPEGTS, VMDK, NVRAM, PCAP_1, PCAP_2, PCAPNG, SQLITEDB, TTF, WOFF, WOFF2
             };
         }
 
@@ -195,6 +195,9 @@ namespace MimeDetective.InMemory
 
         //WOFF font
         public static readonly FileType WOFF = new FileType(new byte?[] { 0x77, 0x4f, 0x46, 0x46 }, "woff", "font/woff");
+
+        //WOFF2 font
+        public static readonly FileType WOFF2 = new FileType(new byte?[] { 0x77, 0x4f, 0x46, 0x32 }, "woff2", "font/woff2");
 
         #endregion
         #region Python
