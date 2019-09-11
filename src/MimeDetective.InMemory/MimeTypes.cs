@@ -91,7 +91,7 @@ namespace MimeDetective.InMemory
         public static readonly FileType EPUB = new FileType(new byte?[0], "epub", "application/epub+zip");
 
         // media
-        public static readonly FileType OGG = new FileType(new byte?[] { 103, 103, 83, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0 }, "oga,ogg,ogv,ogx", "application/ogg");
+        public static readonly FileType OGG = new FileType(new byte?[] { 0x4f, 0x67, 0x67, 0x53 }, "oga,ogg,ogv,ogx", "application/ogg");
 
         //MID, MIDI     Musical Instrument Digital Interface (MIDI) sound file
         public static readonly FileType MIDI = new FileType(new byte?[] { 0x4D, 0x54, 0x68, 0x64 }, "midi,mid", "audio/midi");
