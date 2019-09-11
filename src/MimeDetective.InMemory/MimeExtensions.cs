@@ -9,7 +9,9 @@ namespace MimeDetective.InMemory
     {
         public static FileType DetectMimeType(this Stream stream)
         {
-            var data = new byte[1024];
+            var tmp = MimeTypes.AllTypes.Select(x => x.HeaderOffset + x.Header.Length).OrderByDescending(x => x)
+                .FirstOrDefault();
+            var data = new byte[tmp];
             stream.Read(data, 0, data.Length);
             stream.Position = 0;
 
