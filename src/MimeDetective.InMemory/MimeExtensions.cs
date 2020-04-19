@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -8,6 +7,34 @@ namespace MimeDetective.InMemory
 {
     public static class MimeExtensions
     {
+        public static FileType DetectMimeType(this Stream stream)
+        {
+            var tmp = MimeTypes.AllTypes.Select(x => x.HeaderOffset + x.Header.Length).OrderByDescending(x => x)
+                .FirstOrDefault();
+            var data = new byte[tmp];
+            stream.Read(data, 0, data.Length);
+            stream.Position = 0;
+
+            IEnumerable<byte?> GetHeader(FileType t) => data
+                .Skip(t.HeaderOffset)
+                .Take(t.Header.Length)
+                .Cast<byte?>();
+
+            var comparer = new IgnoreNullComparer();
+
+            var result = MimeTypes.AllTypes
+                .OrderByDescending(t => t.Header.Length)
+                .FirstOrDefault(t => t.Header.SequenceEqual(GetHeader(t), comparer));
+
+            if (result == null)
+                return null;
+
+            if (!result.Equals(MimeTypes.ZIP))
+                return result;
+
+            return CheckForMsOfficeTypes(stream) ?? MimeTypes.ZIP;
+        }
+
         public static FileType DetectMimeType(this byte[] file)
         {
             IEnumerable<byte?> GetHeader(FileType t) => file
@@ -18,6 +45,7 @@ namespace MimeDetective.InMemory
             var comparer = new IgnoreNullComparer();
 
             var result = MimeTypes.AllTypes
+                .OrderByDescending(t => t.Header.Length)
                 .FirstOrDefault(t => t.Header.SequenceEqual(GetHeader(t), comparer));
 
             if (result == null)
@@ -28,11 +56,11 @@ namespace MimeDetective.InMemory
 
             using (var ms = new MemoryStream(file))
             {
-                return CheckForDocxAndXlsx(ms) ?? MimeTypes.ZIP;
+                return CheckForMsOfficeTypes(ms) ?? MimeTypes.ZIP;
             }
         }
 
-        private static FileType CheckForDocxAndXlsx(Stream zip)
+        private static FileType CheckForMsOfficeTypes(Stream zip)
         {
             try
             {
@@ -44,7 +72,13 @@ namespace MimeDetective.InMemory
                     if (zipFile.Entries.Any(e => e.FullName.StartsWith("xl/")))
                         return MimeTypes.EXCELX;
 
-                    return CheckForOdtAndOds(zipFile);
+                    if (zipFile.Entries.Any(e => e.FullName.StartsWith("ppt/")))
+                        return MimeTypes.PPTX;
+
+                    if (zipFile.Entries.Any(e => e.FullName.StartsWith("visio/")))
+                        return MimeTypes.VSDX;
+
+                    return CheckForMimeTypeFile(zipFile);
                 }
             }
             catch (InvalidDataException)
@@ -54,11 +88,11 @@ namespace MimeDetective.InMemory
 
         }
 
-        private static FileType CheckForOdtAndOds(ZipArchive zipFile)
+        private static FileType CheckForMimeTypeFile(ZipArchive zipFile)
         {
             var ooMimeType = zipFile.Entries.FirstOrDefault(e => e.FullName == "mimetype");
             if (ooMimeType == null || ooMimeType.Length > 127) //zip bomb protection
-                return null;
+                return CheckForOtherTypes(zipFile);
 
             using (var textReader = new StreamReader(ooMimeType.Open()))
             {
@@ -69,8 +103,22 @@ namespace MimeDetective.InMemory
 
                 if (mimeType == MimeTypes.ODS.Mime)
                     return MimeTypes.ODS;
+
+                if (mimeType == MimeTypes.EPUB.Mime)
+                    return MimeTypes.EPUB;
             }
 
+            return null;
+        }
+
+        private static FileType CheckForOtherTypes(ZipArchive zipFile)
+        {
+            if (zipFile.Entries.Any(x => x.Name.EndsWith(".nuspec")))
+                return MimeTypes.NUPKG;
+
+            if (zipFile.Entries.Any(x => x.FullName.Contains("META-INF/")))
+                return MimeTypes.JAR;
+            
             return null;
         }
 
