@@ -11,6 +11,14 @@ In contrast to other versions, It does this in memory.</Description>
     <Version>0.2.0.0</Version>
     <Copyright>Anton Hryzodub</Copyright>
     <PackageProjectUrl>https://github.com/hryz/MimeDetective.InMemory</PackageProjectUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
 
 </Project>
